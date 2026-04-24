@@ -1,0 +1,62 @@
+// application/freertos/embedded_proto/proto/paicore.proto
+syntax = "proto3";
+package paicore;
+
+message InitRequest {
+  uint32 thread_id = 1;
+}
+
+message InferRequest {
+  uint32         thread_id = 1;
+  uint32         timesteps = 2;
+  bytes          data      = 3;   // [T,C,H,W] flattened uint8 tensor
+}
+
+message ConfigRequest {
+  uint32 block_index = 1;
+}
+
+message TestRequest {
+  uint32 block_index = 1;
+}
+
+message HostMessage {
+  oneof payload {
+    InitRequest   init_req   = 1;
+    InferRequest  infer_req  = 2;
+    ConfigRequest config_req = 3;
+    TestRequest   test_req   = 4;
+  }
+}
+
+message InitResponse {
+  uint32 thread_id = 1;
+  bool   success   = 2;
+}
+
+message InferResponse {
+  uint32 thread_id = 1;
+  bool   success   = 2;
+  bytes  data      = 3;   // [T,C,H,W] flattened uint8 output tensor
+  uint32 cycles    = 4;
+}
+
+message ConfigResponse {
+  uint32 block_index = 1;
+  bool   success     = 2;
+}
+
+message TestResponse {
+  uint32 block_index    = 1;
+  bool   success        = 2;
+  uint32 mismatch_frame = 3;
+}
+
+message DeviceMessage {
+  oneof payload {
+    InitResponse   init_resp   = 1;
+    InferResponse  infer_resp  = 2;
+    ConfigResponse config_resp = 3;
+    TestResponse   test_resp   = 4;
+  }
+}

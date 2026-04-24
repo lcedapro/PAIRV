@@ -72,3 +72,14 @@ tasks/
 .codex
 AGENTS.md
 CLAUDE.md
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# x86 test binaries
+application/freertos/embedded_proto/test/test_ringbuf
+application/freertos/embedded_proto/test/test_frame_builder
+application/freertos/embedded_proto/test/test_neuron_map
+application/freertos/embedded_proto/test/test_uart_frame
+application/freertos/embedded_proto/test/test_config_frame

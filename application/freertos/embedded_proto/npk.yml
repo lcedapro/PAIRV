@@ -1,0 +1,38 @@
+# application/freertos/embedded_proto/npk.yml
+name: app-nsdk_paicore_firmware
+owner: nuclei
+version:
+description: PaiCore SNN Inference Firmware with FreeRTOS
+type: app
+keywords:
+  - freertos
+  - snn
+category: freertos application
+license:
+homepage:
+
+dependencies:
+  - name: sdk-nuclei_sdk
+    version:
+
+configuration:
+  app_commonflags:
+    value: -O2
+    type: text
+    description: Application Compile Flags
+
+setconfig:
+
+codemanage:
+  copyfiles:
+    - path: ["**/*.c", "**/*.h", "**/*.cpp", "proto/*.proto"]
+  incdirs:
+    - path: ["./", "inc/", "inc/proto/"]
+  libdirs:
+  ldlibs:
+    - libs:
+
+buildconfig:
+  - type: common
+    common_flags:
+      - flags: ${app_commonflags}
